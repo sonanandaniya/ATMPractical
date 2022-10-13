@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.drcpractical.viewModels.HomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.MainActivity">
+
+        <TextView
+            android:id="@+id/tv_available_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/available_balance"
+            android:textSize="@dimen/_15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_available_balance_value"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_available_balance_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@{viewModel.availableAmount}"
+            android:textSize="@dimen/_15sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_available_balance"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="50,000" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/br_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_available_balance_value,tv_available_balance" />
+
+
+        <TextView
+            android:id="@+id/tv_available_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/available_note"
+            android:textSize="@dimen/_15sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/tv_available_note_value"
+            app:layout_constraintTop_toBottomOf="@id/br_balance" />
+
+        <TextView
+            android:id="@+id/tv_available_note_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@{String.valueOf(viewModel.availableNotes)}"
+            android:textSize="@dimen/_15sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_available_note"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/br_balance"
+            tools:text="80" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/br_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_available_note_value,tv_available_note" />
+
+
+        <EditText
+            android:id="@+id/et_withdraw_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/drawable_border"
+            android:hint="Enter amount"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:padding="10dp"
+            android:text="@={viewModel.withdrawalAmount}"
+            app:layout_constraintTop_toBottomOf="@id/br_note" />
+
+        <Button
+            android:id="@+id/btn_withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{()->viewModel.withdrawAmount()}"
+            android:text="@string/withdraw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_withdraw_amount" />
+
+
+        <TextView
+            android:id="@+id/tv_transaction_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/tr_id"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tv_transaction_amount"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_withdraw" />
+
+        <TextView
+            android:id="@+id/tv_transaction_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/tr_amount"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tv_transaction_notes"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/tv_transaction_id"
+            app:layout_constraintTop_toBottomOf="@id/btn_withdraw" />
+
+        <TextView
+            android:id="@+id/tv_transaction_notes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/tr_notes"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/tv_transaction_amount"
+            app:layout_constraintTop_toBottomOf="@id/btn_withdraw" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/br_transaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tv_transaction_amount,tv_transaction_id,tv_transaction_notes" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_transaction_notes,tv_transaction_id,tv_transaction_amount,br_transaction,rv_history" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/br_transaction" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

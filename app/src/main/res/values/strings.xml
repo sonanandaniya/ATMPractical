@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DrcPractical</string>
+    <string name="available_balance">"Available Balance : "</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="tr_id">ID</string>
+    <string name="tr_amount">Amount</string>
+    <string name="tr_notes">Notes</string>
+    <string name="available_note">"Available Notes : "</string>
+</resources>
